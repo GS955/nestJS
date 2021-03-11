@@ -1,0 +1,75 @@
+<script>
+    // --------------------
+    // static val
+    // --------------------
+    const router = 'login'
+    // --------------------
+    // variables
+    // --------------------
+
+    // --------------------
+    // functions
+    // --------------------
+    function setButtonEvent() {
+        $('button[name="login"]').on('click', onsubmit);
+        $(document).keydown(function(key) {
+            if (key.keyCode === 13) onsubmit();
+        });
+    };
+    function onsubmit() {
+
+        const userid = $('input[name="userid"]').val();
+        const passwd = $('input[name="passwd"]').val();
+
+        if (!userid) return false;
+        if (!passwd) return false;
+
+        const isrem = $("input:checkbox[name='remember']").is(":checked");
+
+        if (!isrem) {
+            $.post('/'+router+'/setRemember', {
+                isrem: isrem,
+            }, function (res) {
+            });
+        }
+
+        $.post('/'+router+'/loginCheck', {
+            userid: userid,
+            passwd: passwd
+        }, function (res) {
+
+            if (!res.data.length) {
+                alert('Incorrect password !');
+            } else {
+                let data = res.data[0];
+
+                if (isrem) {
+                    $.post('/'+router+'/setRemember', {
+                        isrem: isrem,
+                        USER_ID: userid,
+                        USER_PW: passwd,
+
+                    }, function (res) {});
+                }
+
+                if (!parseInt(data.USE_YN)) {
+                    alert('Access denied !')
+                    return false;
+                }
+
+                $.post('/'+router+'/loginok', data, function (res) {
+                    location.href = '/';
+                });
+
+            }
+
+        });
+    };
+    // --------------------
+    // INIT
+    // --------------------
+    $(function () {
+        setButtonEvent();
+    });
+
+</script>

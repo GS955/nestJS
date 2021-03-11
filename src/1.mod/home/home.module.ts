@@ -4,6 +4,6 @@ import { HomeService } from '@root/3.svs/home/home.service';
 
 @Module({
   controllers: [HomeController],
-  providers: [HomeService]
+  providers: [HomeService],
 })
 export class HomeModule {}
