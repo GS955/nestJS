@@ -1,0 +1,75 @@
+<script>
+
+    $(function() {
+        $('.btn-logout').click(function() {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+                confirmButtonText: "<i class='flaticon-logout text-white pr-2'></i> Logout",
+                customClass: {
+                    confirmButton: "btn-danger",
+                    cancelButton: "btn-default"
+                }
+            }).then(function(result) {
+                if (result.value) {
+                    location.href = '/logout';
+                }
+            });
+        });
+
+        $('.btn-changepw-modal').click(function () {
+            $('#modal_changpw').modal('show');
+            $('#modal_changpw').find('input').val('').removeClass('is-invalid');
+        });
+
+        $('.submit-changepw').click(function () {
+            var cur_pw = $('.cur-pw').val();
+            var new_pw = $('.new-pw').val();
+            var re_new_pw = $('.re-new-pw').val();
+
+            cur_pw.length == 0 ? $('.cur-pw').addClass('is-invalid') : $('.cur-pw').removeClass('is-invalid');
+            new_pw.length == 0 ? $('.new-pw').addClass('is-invalid') : $('.new-pw').removeClass('is-invalid');
+            re_new_pw.length == 0 ? $('.re-new-pw').addClass('is-invalid') : $('.re-new-pw').removeClass('is-invalid');
+
+            if ($('#modal_changpw .is-invalid').length > 0) return;
+
+            if (new_pw != re_new_pw) {
+                $('.re-new-pw').addClass('is-invalid');
+                $('.re-new-pw').val('');
+                return;
+            }
+
+            $.post('/change_pw', {cur_pw: cur_pw, new_pw: new_pw}, function (x) {
+                var rst = x.CNT;
+                if (rst > 0) {
+                    Swal.fire({
+                        title: "Success",
+                        text: "비밀번호가 변경되었습니다.",
+                        icon: "success",
+                        showCancelButton: false,
+                        confirmButtonText: "Yes",
+                        confirmButtonText: "<i class='flaticon-logout text-white pr-2'></i> Logout",
+                        customClass: {
+                            confirmButton: "btn-danger",
+                            cancelButton: "btn-default"
+                        }
+                    }).then(function (result) {
+                        if (result.value) {
+                            location.href = '/logout';
+                        }
+                    });
+                } else {
+                    $('.cur-pw').addClass('is-invalid');
+                    $('.cur-pw').val('');
+                    $('.new-pw').val('');
+                    $('.re-new-pw').val('');
+                }
+            });
+        });
+
+    });
+
+</script>

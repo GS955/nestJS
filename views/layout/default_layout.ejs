@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
+<head>
+    <base href="">
+    <meta charset="utf-8"/>
+    <title>타이틀</title>
+    <meta name="description" content="<%= WWW_DESC %>"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="robots" content="noindex,nofollow" />
+
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
+    <!--end::Fonts-->
+
+    <!--begin::Page Vendors Styles(used by this page)-->
+    <link href="assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css"/>
+    <!--end::Page Vendors Styles-->
+
+    <!--begin::Global Theme Styles(used by all pages)-->
+    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css"/>
+    <!--end::Global Theme Styles-->
+
+    <!--begin::Layout Themes(used by all pages)-->
+    <link href="assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css"/>
+    <!--end::Layout Themes-->
+
+    <!--<link rel="shortcut icon" href="img/favicon.ico"/>-->
+</head>
+
+<!--end::Head-->
+
+<!--begin::Body-->
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+
+    <!--begin::Main-->
+    <%- include(`../core/${core}/_header-mobile.ejs`) %>
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Page-->
+        <div class="d-flex flex-row flex-column-fluid page">
+            <%- include(`../_nav`) %>
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+                <%- include(`../pages/${page}/_topbar`) %>
+                <!--begin::Content-->
+                <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                    <%- include(`../pages/${page}/body`) %>
+                </div>
+                <!--end::Content-->
+                <%- include(`../_footer.ejs`) %>
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Page-->
+    </div>
+    <!--end::Main-->
+
+    <div class="modal fade" id="modal_changpw" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Change Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-solid cur-pw" placeholder="Enter Current Password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-solid new-pw" placeholder="Enter New Password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-solid re-new-pw" placeholder="Confirm New Password">
+                    </div>
+                    <div class="modal-footer border-0 pt-5 pb-0 row px-0">
+                        <div class="col-2 m-0 pr-0">
+                            <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+                        </div>
+                        <div class="col-10 m-0">
+                            <button type="button" class="btn btn-primary btn-block submit-changepw">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<!--end::Body-->
+</html>
