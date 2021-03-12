@@ -5,8 +5,8 @@ const WWW_TITLE = 'NEST JS INITIALIZE';
 const WWW_DESC = 'NEST JS PRACTICE';
 const COOKIE_KEY = 'NEST JS';
 
-// const SERVER_IP = '133.186.144.29';
 const SERVER_IP = '0.0.0.0';
+const DB_SERVER_IP = '133.186.144.29';
 const PRO_DB_NAME = 'talk_sanofi_dev';
 const DEV_DB_NAME = 'talk_sanofi_dev1';
 
@@ -41,7 +41,7 @@ const config = {
     // if (process.env.NODE_ENV === 'development') {
     else {
       return {
-        host: SERVER_IP,
+        host: DB_SERVER_IP,
         user: DB_USER,
         password: DB_PASS,
         database: DEV_DB_NAME,

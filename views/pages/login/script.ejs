@@ -34,8 +34,8 @@
         }
 
         $.post('/'+router+'/loginCheck', {
-            userid: userid,
-            passwd: passwd
+            UR_ID: userid,
+            UR_PW: passwd
         }, function (res) {
 
             if (!res.data.length) {

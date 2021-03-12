@@ -1,4 +1,4 @@
-const redis = require("redis");
+const redis = require('redis');
 
 const SERV_PORT = '3001';
 const WWW_TITLE = 'MARKTALK : Sanofi';
@@ -14,40 +14,40 @@ const AWS_KEY = '';
 const AWS_REGION = '';
 
 module.exports = {
-    SERV_PORT: SERV_PORT,
-    WWW_TITLE: WWW_TITLE,
-    WWW_DESC: WWW_DESC,
-    SERVER_IP: SERVER_IP,
-    DB_NAME: DB_NAME,
-    DB_PASS: DB_PASS,
-    AWS_KEYID: AWS_KEYID,
-    AWS_KEY: AWS_KEY,
-    AWS_REGION: AWS_REGION,
-    GET_DB_INFO : () => {
-        if (process.env.NODE_ENV === 'production') {
-            return {
-                host: 'localhost',
-                user: DB_USER,
-                password: DB_PASS,
-                database: DB_NAME,
-                dateStrings: 'date'
-            };
-        }
-        if (process.env.NODE_ENV === 'development') {
-            return {
-                host: SERVER_IP,
-                user: DB_USER,
-                password: DB_PASS,
-                database: DB_NAME,
-                dateStrings: 'date'
-            };
-        }
-    },
-    GET_REDIS_INFO : () => {
-        let client;
-        client = redis.createClient(6379, SERVER_IP);
-        client.auth(DB_PASS);
-        return client;
+  SERV_PORT: SERV_PORT,
+  WWW_TITLE: WWW_TITLE,
+  WWW_DESC: WWW_DESC,
+  SERVER_IP: SERVER_IP,
+  DB_NAME: DB_NAME,
+  DB_PASS: DB_PASS,
+  AWS_KEYID: AWS_KEYID,
+  AWS_KEY: AWS_KEY,
+  AWS_REGION: AWS_REGION,
+  GET_DB_INFO: () => {
+    if (process.env.NODE_ENV === 'production') {
+      return {
+        host: 'localhost',
+        user: DB_USER,
+        password: DB_PASS,
+        database: DB_NAME,
+        dateStrings: 'date',
+      };
     }
+    // if (process.env.NODE_ENV === 'development') {
+    else {
+      return {
+        host: SERVER_IP,
+        user: DB_USER,
+        password: DB_PASS,
+        database: DB_NAME,
+        dateStrings: 'date',
+      };
+    }
+  },
+  GET_REDIS_INFO: () => {
+    let client;
+    client = redis.createClient(6379, SERVER_IP);
+    client.auth(DB_PASS);
+    return client;
+  },
 };
-
